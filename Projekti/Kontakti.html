@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Submission Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #333333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        form {
+            background-color: #222222;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #fff;
+            
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 16px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: rgb(197, 0, 0);
+            border:none;
+            padding: 12px 24px;
+            border-radius: 5px;
+            color: white;
+            border-bottom: 4px solid rgb(121, 0, 0);
+            margin:0px;
+        }
+
+
+        button:hover {
+            background-color: rgb(135, 0, 0);
+            border-bottom: 4px solid rgb(197, 0, 0);
+            transform: scale(1.03);
+        }
+    </style>
+</head>
+<body>
+
+    <form id="emailForm" action="#" method="post" onsubmit="return validateForm()">
+        <label for="email">Email:</label>
+        <input type="text" id="email" name="email" placeholder="Enter your email" required>
+
+        <button type="submit">Submit</button>
+    </form>
+
+    <script>
+        function validateForm() {
+            var emailInput = document.getElementById('email');
+            var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+            if (!emailPattern.test(emailInput.value)) {
+                alert('Please enter a valid email address.');
+                return false;
+            }
+
+            
+            redirectToAbout();
+            alert('Your email has been submitted');
+            return false; 
+        }
+
+        function redirectToAbout() {
+            window.location.href = 'About.html';
+        }
+    </script>
+
+</body>
+</html>

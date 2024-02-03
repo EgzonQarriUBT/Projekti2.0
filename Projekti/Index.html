@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login/Register Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #222222;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        form {
+            background-color: #333333; 
+            color: #fff; 
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            text-align: left;
+            margin-bottom: 8px;
+        }
+
+        input {
+            width: calc(100% - 20px);
+            padding: 8px;
+            margin-bottom: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: rgb(197, 0, 0);
+            border:none;
+            padding: 12px 24px;
+            border-radius: 5px;
+            color: white;
+            border-bottom: 4px solid rgb(121, 0, 0);
+            margin:0px;
+        }
+
+
+        button:hover {
+            background-color: rgb(135, 0, 0);
+            border-bottom: 4px solid rgb(197, 0, 0);
+            transform: scale(1.03);
+        }
+
+        .switch-btn {
+            color: rgb(197, 0, 0);
+            text-decoration: none;
+            margin-top: 10px;
+            display: inline-block;
+        }
+
+        .switch-btn:hover {
+            color: rgb(135, 0, 0);
+            text-decoration: none;
+            margin-top: 10px;
+            display: inline-block;
+        }
+
+        .form-error {
+            color: #ff4d4d; 
+            margin-bottom: 15px;
+        }
+
+
+    </style>
+</head>
+<body>
+
+<form id="registerForm" method="post" action="process.php">
+    <h2>Register</h2>
+    <label for="newEmail">Email:</label>
+    <input type="text" id="newEmail" name="newEmail" required>
+
+    <label for="newPassword">Password:</label>
+    <input type="password" id="newPassword" name="newPassword" required>
+
+    <p id="registerError" class="form-error"></p>
+    <button type="button" onclick="registerAndRedirect()">Submit</button>
+    <p>Already have an account? <a href="#" class="switch-btn" onclick="toggleForms()">Login</a></p>
+</form>
+
+<form id="loginForm" method="post" action="process.php">
+    <h2>Login</h2>
+    <label for="email">Email:</label>
+    <input type="text" id="email" name="email" required>
+
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" required>
+
+    <p id="loginError" class="form-error"></p>
+    <button type="button" onclick="loginAndRedirect()">Submit</button>
+    <p>Don't have an account? <a href="#" class="switch-btn" onclick="toggleForms()">Register</a></p>
+</form>
+
+<head>
+
+<script>
+    document.getElementById("loginForm").style.display = "none";
+
+    function toggleForms() {
+        const loginForm = document.getElementById("loginForm");
+        const registerForm = document.getElementById("registerForm");
+
+        loginForm.style.display = loginForm.style.display === "none" ? "block" : "none";
+        registerForm.style.display = registerForm.style.display === "none" ? "block" : "none";
+    }
+
+    function isEmailValid(email) {
+        const emailRegex = /^([A-Za-z0-9_\-.])+@([A-Za-z0-9_\-.])+\.([A-Za-z]{2,4})$/;
+        return emailRegex.test(email);
+    }
+
+    function isPasswordValid(password) {
+        return /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{6,}$/.test(password);
+    }
+
+    function registerAndRedirect() {
+        const newEmail = document.getElementById("newEmail").value;
+        const newPassword = document.getElementById("newPassword").value;
+        const registerError = document.getElementById("registerError");
+        
+        if (isEmailValid(newEmail) && isPasswordValid(newPassword)) {
+           
+            window.location.href = 'Home.html';
+        } else {
+            registerError.textContent = 'Email or password is invalid. Password needs to have at least a small letter, big letter, and a number';
+        }
+    }
+
+    function loginAndRedirect() {
+        const email = document.getElementById("email").value;
+        const password = document.getElementById("password").value;
+        const loginError = document.getElementById("loginError");
+
+        if (isEmailValid(email) && isPasswordValid(password)) {
+           
+            window.location.href = 'Home.html';
+        } else {
+            loginError.textContent = 'Email or password is invalid. Password needs to have at least a small letter, big letter, and a number';
+        }
+    }
+
+    
+
+</script>
+
+</head>
+
+</body>
+</html>
